@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lumen — 简洁、纯净、不设限的 Minecraft 启动器</title>
+<meta name="description" content="Lumen 是一款简洁、纯净、不设限的 Minecraft 启动器。下载完全开放、主题完全自由、镜像完全可配置，没有捆绑、没有资讯噪音、没有账号体系。">
+<meta name="theme-color" content="#08070D">
+<link rel="icon" type="image/png" href="./assets/img/icon-44.png">
+<link rel="apple-touch-icon" href="./assets/img/icon-150.png">
+<link rel="stylesheet" href="./assets/css/style.css">
+<noscript>
+  <style>
+    /* 无 JS 时直接显示全部内容，避免 .reveal 永久隐藏 */
+    .reveal { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
+<script>
+/* 在首次绘制前应用已保存的主题，避免深浅主题闪烁（FOUC）。
+   与 main.js 的 THEME_KEY 保持一致：'lumen-theme' */
+(function () {
+  try {
+    var t = localStorage.getItem('lumen-theme');
+    if (t === 'light' || t === 'dark') {
+      document.documentElement.setAttribute('data-theme', t);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'light' ? '#f7f5fb' : '#08070d');
+    }
+  } catch (e) { /* file:// 下 localStorage 可能被禁，忽略 */ }
+})();
+</script>
+</head>
+<body>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#top" aria-label="Lumen 首页">
+      <picture>
+        <source srcset="./assets/img/logo.webp" type="image/webp">
+        <img src="./assets/img/logo.png" alt="Lumen" class="brand__logo">
+      </picture>
+      <span class="brand__name">Lumen</span>
+      <span class="brand__ver">v0.1.1</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="主导航">
+      <a href="#features" class="nav__link">特性</a>
+      <a href="#preview" class="nav__link">界面</a>
+      <a href="#download" class="nav__link">下载</a>
+      <a href="#guide" class="nav__link">使用说明</a>
+      <a href="#compare" class="nav__link">对比</a>
+      <a href="#faq" class="nav__link">常见问题</a>
+      <a href="#credits" class="nav__link">鸣谢</a>
+      <a href="#download" class="nav__btn nav__btn--sm">立即下载</a>
+    </nav>
+
+    <div class="nav__tools">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+        <svg class="ico ico--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="ico ico--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M4.2 12H1.8M22.2 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M6.5 17.5l-1.7 1.7M19.2 4.8l-1.7 1.7"/></svg>
+      </button>
+      <button class="icon-btn nav__burger" id="burger" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__progress" id="navProgress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <div class="hero__badge reveal">
+        <span class="dot"></span>
+        v0.1.1 · Windows x64 · 纯净无捆绑
+      </div>
+
+      <h1 class="hero__title reveal">
+        简洁、纯净、不设限的<br>
+        <span class="grad">Minecraft 启动器</span>
+      </h1>
+
+      <p class="hero__desc reveal">
+        下载不做限制，主题不做门槛，镜像完全交由你决定。
+        没有捆绑、没有资讯噪音、没有账号体系。
+      </p>
+
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary btn--lg" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe" data-rel="Lumen-0.1.1-win32-x64-setup.exe"
+           download="Lumen-0.1.1-win32-x64-setup.exe" data-dl="installer">
+          <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+          下载安装版
+          <span class="btn__meta">99.5 MB</span>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#download">
+          <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+          查看全部下载
+        </a>
+      </div>
+
+      <div class="hero__note reveal">
+        <svg viewBox="0 0 24 24" class="ico-16" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.6 3.2 8.4 8 9.5 4.8-1.1 8-4.9 8-9.5v-5L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        免安装 · 无捆绑 · 无广告 · 无后台常驻
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat"><b data-count="7">0</b><span>项主题配色可调</span></div>
+        <div class="stat"><b data-count="2198">0</b><span>项单元测试通过</span></div>
+        <div class="stat"><b data-count="37">0</b><span>个独立 npm 包</span></div>
+        <div class="stat"><b data-count="5">0</b><span>种模组加载器</span></div>
+      </div>
+    </div>
+
+    <div class="hero__visual reveal" aria-hidden="true">
+      <div class="hero__glow"></div>
+      <div class="hero__frame">
+        <div class="hero__frame-bar">
+          <span></span><span></span><span></span>
+        </div>
+        <picture>
+          <source srcset="./assets/img/shot-home-dark.webp" type="image/webp">
+          <img src="./assets/img/shot-home-dark.png" alt="" width="1440" height="900">
+        </picture>
+      </div>
+      <div class="hero__chip hero__chip--a">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4z"/><path d="m9 12 2 2 4-4"/></svg>
+        7 项配色全开放
+      </div>
+      <div class="hero__chip hero__chip--b">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg>
+        镜像热更新
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#features" aria-label="向下滚动">
+    <span></span>
+  </a>
+</section>
+
+<!-- ============ 特性 ============ -->
+<section class="section" id="features">
+  <div class="section__head reveal">
+    <span class="eyebrow">核心能力</span>
+    <h2>别人锁着的地方，Lumen 全开着</h2>
+    <p class="section__lead">不是「功能更少」的妥协版，而是把限制从架构里彻底拆掉。</p>
+  </div>
+
+  <div class="bento">
+    <article class="card card--wide reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M8 20h8M12 16v4"/></svg></div>
+      <h3>下载完全开放</h3>
+      <p>走官方 Mojang 或国内镜像，支持分段并发下载、断点续传、失败自动重试、SHA-1 校验与损坏文件自动修复。不存在任何「不支持下载」开关。</p>
+      <ul class="ticks">
+        <li>Forge / Fabric / Quilt / NeoForge / OptiFine</li>
+        <li>自动安装并管理 Java 运行时</li>
+        <li>多连接并发下载器</li>
+      </ul>
+    </article>
+
+    <article class="card card--tall reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg></div>
+      <h3>主题完全自由</h3>
+      <p>深浅色跟随系统或手动切换。顶端栏、侧边栏、主要色、卡片、背景、警告、错误共 7 项配色可自由调整。</p>
+      <ul class="ticks">
+        <li>背景图 / 视频 / 粒子 / 光晕 / 背景音乐</li>
+        <li>自定义字体、字号、圆角、模糊度</li>
+        <li>自定义 CSS 覆盖启动器</li>
+        <li>主题包 <code>.xtheme</code> 导入 / 导出</li>
+        <li>每个实例可单独指定主题</li>
+        <li>无赞助门槛，无隐藏主题</li>
+      </ul>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+      <h3>镜像由你决定</h3>
+      <p>内置 BMCLAPI 只是默认值，不是绑定。可新增、改名、改地址、删除任意数量的镜像源，保存后立即热生效。</p>
+      <ul class="ticks">
+        <li>自动 / 官方 / BMCL 三种策略</li>
+        <li>运行时热更新镜像集合</li>
+        <li>支持 HTTP 代理自定义</li>
+      </ul>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h3>商店与整合包</h3>
+      <p>Modrinth 全程可用无需 Key；CurseForge 支持自填 API Key，未配置时给出可读提示而不是 403。</p>
+      <ul class="ticks">
+        <li>模组 / 资源包 / 光影 / 存档管理</li>
+        <li>模组依赖自动解析与安装</li>
+        <li>Feed The Beast 与本地整合包</li>
+      </ul>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M7.5 8h9a5.5 5.5 0 0 1 0 11h-9a5.5 5.5 0 0 1 0-11Z"/><path d="M8 12h7M8 15.5h4.5"/><circle cx="16" cy="14" r="1.1"/></svg></div>
+      <h3>手柄与大屏模式</h3>
+      <p>内置完整手柄适配，带快捷菜单与大屏专属界面。</p>
+      <ul class="ticks">
+        <li>Xbox / Steam Deck / PS2–PS5 / Switch</li>
+        <li>D-Pad 与摇杆空间焦点导航</li>
+        <li>Steam Deck 专项适配</li>
+      </ul>
+    </article>
+
+    <article class="card card--wide reveal">
+      <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M2 19h20"/></svg></div>
+      <h3>干净的首页</h3>
+      <p>删除了上游的启动即拉取新闻轮播与贡献者接口，首页不再发起任何无关网络请求。只留下你需要的东西。</p>
+      <ul class="ticks">
+        <li>启动零冗余请求</li>
+        <li>无账号体系、无遥测上报</li>
+        <li>自更新默认关闭，源由你指定</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="trust reveal">
+    <div class="trust__item">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.6 3.2 8.4 8 9.5 4.8-1.1 8-4.9 8-9.5v-5L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <b>零捆绑</b>
+      <span>不附带任何推广位、不推新闻、不驻留后台</span>
+    </div>
+    <div class="trust__item">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <b>零遥测</b>
+      <span>不采集使用数据、不上传任何行为记录</span>
+    </div>
+    <div class="trust__item">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg>
+      <b>无账号体系</b>
+      <span>启动即用，不需要注册任何平台账号</span>
+    </div>
+    <div class="trust__item">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17h16M6 17V9M10 17V5M14 17v-6M18 17v-9"/></svg>
+      <b>持续更新</b>
+      <span>版本迭代持续跟进上游生态变化</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 界面预览 ============ -->
+<section class="section section--alt" id="preview">
+  <div class="section__head reveal">
+    <span class="eyebrow">界面预览</span>
+    <h2>为长时间游戏而生的界面</h2>
+    <p class="section__lead">侧边栏管理实例与整合包，首页汇总模组、存档、光影与服务器，启动按钮始终触手可及。</p>
+    <p class="section__note">以下均为 Lumen v0.1.1 <b>实机运行截图</b>，未经修饰。</p>
+  </div>
+
+  <div class="preview reveal">
+    <div class="shots">
+      <figure class="shot">
+        <div class="shot__bar">
+          <span></span><span></span><span></span>
+          <em>Lumen — 香草纪元</em>
+        </div>
+        <picture>
+          <source srcset="./assets/img/shot-home.webp" type="image/webp">
+          <img src="./assets/img/shot-home.png" alt="Lumen 启动器主界面：左侧为实例侧边栏，顶部显示实例版本、游戏时长与上次游玩时间，右侧为「启动」按钮与内容统计" loading="lazy" width="1440" height="900">
+        </picture>
+        <figcaption>主界面 —— 实例信息、内容统计与一键启动</figcaption>
+      </figure>
+
+      <div class="shot__row">
+        <figure class="shot">
+        <div class="shot__bar">
+          <span></span><span></span><span></span>
+          <em>Lumen — 整合包市场</em>
+        </div>
+          <picture>
+            <source srcset="./assets/img/shot-store.webp" type="image/webp">
+            <img src="./assets/img/shot-store.png" alt="Lumen 整合包市场：左侧为来源与模组加载器筛选，中间为整合包详情与截图" loading="lazy" width="1440" height="900">
+          </picture>
+          <figcaption>整合包市场 —— Modrinth / CurseForge / FTB 三个来源</figcaption>
+        </figure>
+
+        <figure class="shot">
+        <div class="shot__bar">
+          <span></span><span></span><span></span>
+          <em>Lumen — 设置</em>
+        </div>
+          <picture>
+            <source srcset="./assets/img/shot-settings.webp" type="image/webp">
+            <img src="./assets/img/shot-settings.png" alt="Lumen 设置界面：左侧为设置分类导航，右侧为基本设置选项" loading="lazy" width="1440" height="900">
+          </picture>
+          <figcaption>设置 —— 基本、实例、网络、关于</figcaption>
+        </figure>
+      </div>
+
+      <figure class="shot shot--dark">
+        <div class="shot__bar">
+          <span></span><span></span><span></span>
+          <em>Lumen — 深色主题</em>
+        </div>
+        <picture>
+          <source srcset="./assets/img/shot-home-dark.webp" type="image/webp">
+          <img src="./assets/img/shot-home-dark.png" alt="Lumen 启动器深色主题主界面" loading="lazy" width="1440" height="900">
+        </picture>
+        <figcaption>深色主题 —— 跟随系统自动切换</figcaption>
+      </figure>
+    </div>
+
+    <div class="preview__side">
+      <div class="preview__item reveal">
+        <h3>深浅双主题</h3>
+        <p>跟随系统或手动锁定，7 项界面配色可自由调整，层级在深浅两种主题下都保持清晰。</p>
+      </div>
+      <div class="preview__item reveal">
+        <h3>可自定义的"氛围"</h3>
+        <p>背景图 / 视频 / 粒子 / 光晕 / 背景音乐，叠加模糊度、色调遮罩与自定义 CSS，做出你自己的风格。</p>
+      </div>
+      <div class="preview__item reveal">
+        <h3>键盘与手柄双通道</h3>
+        <p>命令面板（Command Palette）让你用键盘直达任意功能；手柄用户则有完整的大屏布局与空间焦点导航。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 下载 ============ -->
+<section class="section" id="download">
+  <div class="section__head reveal">
+    <span class="eyebrow">下载</span>
+    <h2>选择你的安装方式</h2>
+    <p class="section__lead">提供安装版与便携版两种形态，选择适合你的那一种。</p>
+  </div>
+
+  <div class="dl-tabs reveal" role="tablist" aria-label="下载版本">
+    <button class="dl-tab is-active" data-tab="installer" type="button" role="tab" aria-selected="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+      安装版
+      <em>推荐</em>
+    </button>
+    <button class="dl-tab" data-tab="portable" type="button" role="tab" aria-selected="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4z"/><path d="M9 7V5h6v2"/></svg>
+      便携版
+    </button>
+    <button class="dl-tab" data-tab="all" type="button" role="tab" aria-selected="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      全部文件
+    </button>
+  </div>
+
+  <!-- 安装版 -->
+  <div class="dl-panel is-active" data-panel="installer">
+    <div class="dl-card reveal">
+      <div class="dl-card__head">
+        <div>
+          <h3>Lumen <span class="ver">v0.1.1</span></h3>
+          <p class="dl-card__desc">NSIS 安装包。安装到系统、创建桌面快捷方式、注册 <code>lumen://</code> 协议，可与 XMCL 共存。</p>
+        </div>
+        <div class="dl-card__size">
+          <b>99.5</b><span>MB</span>
+        </div>
+      </div>
+
+      <ul class="dl-meta">
+        <li><span>平台</span><div>Windows 10 / 11 · x64</div></li>
+        <li><span>运行时</span><div>Electron 43.5.0（随包附带，无需预装）</div></li>
+        <li><span>签名</span><div>未签名，SmartScreen 需手动放行</div></li>
+        <li><span>数据目录</span><div><code>%APPDATA%\Lumen</code>（与 XMCL 完全隔离）</div></li>
+      </ul>
+
+      <div class="dl-card__actions">
+        <a class="btn btn--primary btn--lg" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe" data-rel="Lumen-0.1.1-win32-x64-setup.exe"
+           download="Lumen-0.1.1-win32-x64-setup.exe" data-dl="installer">
+          <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+          立即下载安装包
+        </a>
+        <button class="btn btn--ghost btn--lg" type="button" data-copy="4EFAD26357FDC1101C2366062F168F80E6E12405AEE0CF77711B3E4B31212231" data-copy-label="复制 SHA-256">
+          复制 SHA-256
+        </button>
+        <a class="btn btn--flat btn--lg" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe.sha256" data-rel="Lumen-0.1.1-win32-x64-setup.exe.sha256" download>校验文件</a>
+      </div>
+
+      <div class="dl-steps">
+        <div class="dl-step"><i>1</i><div><b>下载并运行</b><span>双击 <code>Lumen-0.1.1-win32-x64-setup.exe</code></span></div></div>
+        <div class="dl-step"><i>2</i><div><b>放行 SmartScreen</b><span>点「更多信息」→「仍要运行」</span></div></div>
+        <div class="dl-step"><i>3</i><div><b>完成首启向导</b><span>语言 → 外观 → 数据目录 → 添加账号</span></div></div>
+        <div class="dl-step"><i>4</i><div><b>开始游戏</b><span>账号支持微软正版与外置登录</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 便携版 -->
+  <div class="dl-panel" data-panel="portable">
+    <div class="dl-card reveal">
+      <div class="dl-card__head">
+        <div>
+          <h3>Lumen 便携版 <span class="ver">v0.1.1</span></h3>
+          <p class="dl-card__desc">解压即用，不写注册表、不装服务。解压后双击 <code>Lumen.exe</code> 即可运行，适合放在移动硬盘或 U 盘。</p>
+        </div>
+        <div class="dl-card__size">
+          <b id="portableSize">142.4</b><span>MB</span>
+        </div>
+      </div>
+
+      <ul class="dl-meta">
+        <li><span>平台</span><div>Windows 10 / 11 · x64</div></li>
+        <li><span>解压后</span><div>约 341 MB · 26 个文件</div></li>
+        <li><span>数据目录</span><div>默认仍为 <code>%APPDATA%\Lumen</code>，可在向导中改</div></li>
+        <li><span>说明</span><div>不自动注册 <code>lumen://</code> 协议</div></li>
+      </ul>
+
+      <div class="dl-card__actions">
+        <a class="btn btn--primary btn--lg" href="./downloads/Lumen-0.1.1-win32-x64.zip" data-rel="Lumen-0.1.1-win32-x64.zip"
+           download="Lumen-0.1.1-win32-x64.zip" data-dl="portable">
+          <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+          下载便携版 ZIP
+        </a>
+        <button class="btn btn--ghost btn--lg" type="button" data-copy="8F2B7AFBFD0A31C34C9DC5849015C217731A009374188BE68E28398AD5382E66" data-copy-label="复制 SHA-256">
+          复制 SHA-256
+        </button>
+        <a class="btn btn--flat btn--lg" href="./downloads/Lumen-0.1.1-win32-x64.zip.sha256" data-rel="Lumen-0.1.1-win32-x64.zip.sha256" download>校验文件</a>
+      </div>
+
+      <div class="dl-steps">
+        <div class="dl-step"><i>1</i><div><b>下载 ZIP</b><span>完整下载后再解压，避免缺文件</span></div></div>
+        <div class="dl-step"><i>2</i><div><b>解压到任意目录</b><span>路径建议不含特殊字符</span></div></div>
+        <div class="dl-step"><i>3</i><div><b>运行 Lumen.exe</b><span>首次运行会创建数据目录</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全部文件 -->
+  <div class="dl-panel" data-panel="all">
+    <div class="dl-list reveal">
+      <div class="dl-list__row">
+        <div class="dl-list__name"><b>Lumen-0.1.1-win32-x64-setup.exe</b><span>Windows 安装包 · 99.5 MB</span></div>
+        <a class="btn btn--ghost" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe" data-rel="Lumen-0.1.1-win32-x64-setup.exe" download="Lumen-0.1.1-win32-x64-setup.exe" data-dl="installer">下载</a>
+      </div>
+      <div class="dl-list__row">
+        <div class="dl-list__name"><b>Lumen-0.1.1-win32-x64.zip</b><span>Windows 便携版 · 142.4 MB · 解压即用</span></div>
+        <a class="btn btn--ghost" href="./downloads/Lumen-0.1.1-win32-x64.zip" data-rel="Lumen-0.1.1-win32-x64.zip" download="Lumen-0.1.1-win32-x64.zip" data-dl="portable">下载</a>
+      </div>
+      <div class="dl-list__row">
+        <div class="dl-list__name"><b>Lumen-0.1.1-win32-x64-setup.exe.sha256</b><span>校验文件 · 256-bit</span></div>
+        <a class="btn btn--ghost" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe.sha256" data-rel="Lumen-0.1.1-win32-x64-setup.exe.sha256" download>下载</a>
+      </div>
+      <div class="dl-list__row">
+        <div class="dl-list__name"><b>Lumen-0.1.1-win32-x64.zip.sha256</b><span>校验文件 · 256-bit</span></div>
+        <a class="btn btn--ghost" href="./downloads/Lumen-0.1.1-win32-x64.zip.sha256" data-rel="Lumen-0.1.1-win32-x64.zip.sha256" download>下载</a>
+      </div>
+      <div class="dl-list__row">
+        <div class="dl-list__name"><b>打开本地下载目录</b><span>使用系统文件管理器查看全部文件</span></div>
+        <a class="btn btn--flat" href="./downloads/" id="openDownloads" data-rel-folder target="_blank" rel="noopener">打开</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dl-note reveal">
+    <svg viewBox="0 0 24 24" class="ico-16" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+    两个版本的 SHA-256 校验文件一并提供，下载后可用 <code>certutil</code> 或任意校验工具核对完整性。
+  </div>
+</section>
+
+<!-- ============ 使用说明 ============ -->
+<section class="section section--alt" id="guide">
+  <div class="section__head reveal">
+    <span class="eyebrow">使用说明</span>
+    <h2>从安装到开玩，八步就够了</h2>
+    <p class="section__lead">以下流程与界面文案均取自 Lumen v0.1.1 实机运行界面，非推测。</p>
+  </div>
+
+  <!-- 目录 -->
+  <nav class="guide-toc reveal" aria-label="使用说明目录">
+    <a href="#g-install">01 安装</a>
+    <a href="#g-setup">02 首启向导</a>
+    <a href="#g-account">03 添加账号</a>
+    <a href="#g-install-game">04 安装游戏</a>
+    <a href="#g-network">05 网络设置</a>
+    <a href="#g-java">06 内存与 Java</a>
+    <a href="#g-store">07 商店与模组</a>
+    <a href="#g-theme">08 外观与主题</a>
+    <a href="#g-advanced">09 进阶技巧</a>
+    <a href="#g-hidden">10 隐藏功能</a>
+    <a href="#g-pitfall">11 注意事项</a>
+  </nav>
+
+  <!-- 步骤总览 -->
+  <ol class="steps-rail reveal">
+    <li class="steps-rail__item"><i>1</i><b>安装</b><span>放行 SmartScreen</span></li>
+    <li class="steps-rail__item"><i>2</i><b>首启向导</b><span>4 步，可跳过账号</span></li>
+    <li class="steps-rail__item"><i>3</i><b>添加账号</b><span>微软 / 离线 / 外置</span></li>
+    <li class="steps-rail__item"><i>4</i><b>装游戏</b><span>选版本与加载器</span></li>
+    <li class="steps-rail__item"><i>5</i><b>调网络</b><span>镜像与代理</span></li>
+    <li class="steps-rail__item"><i>6</i><b>调 Java</b><span>内存自动分配</span></li>
+    <li class="steps-rail__item"><i>7</i><b>装模组</b><span>商店一键装</span></li>
+    <li class="steps-rail__item"><i>8</i><b>启动</b><span>点「启动」即可</span></li>
+  </ol>
+
+  <div class="guide-grid">
+
+    <!-- 1. 安装 -->
+    <article class="guide reveal" id="g-install">
+      <div class="guide__head">
+        <span class="guide__no">01</span>
+        <h3>安装与放行安全提示</h3>
+      </div>
+      <ol class="glist glist--steps">
+        <li><b>下载</b><span>取上方的 <code>Lumen-0.1.1-win32-x64-setup.exe</code>（99.5 MB）。</span></li>
+        <li><b>双击运行</b><span>Windows SmartScreen 会弹「未知发布者」——因为安装包<strong>未做代码签名</strong>。</span></li>
+        <li><b>放行</b><span>点「<b>更多信息</b>」→「<b>仍要运行</b>」。</span></li>
+        <li><b>安装位置</b><span>默认装到 <code>%LOCALAPPDATA%\Programs\Lumen</code>。</span></li>
+      </ol>
+      <div class="tip tip--warn">
+        <b>为什么没签名？</b>
+        <span>代码签名证书需要购买。后续配上证书（<code>electron-builder.config.ts</code> 的 <code>win.signtoolOptions.certificateFile</code>）即可消除此提示。</span>
+      </div>
+    </article>
+
+    <!-- 2. 首启向导 -->
+    <article class="guide reveal" id="g-setup">
+      <div class="guide__head">
+        <span class="guide__no">02</span>
+        <h3>首次启动向导（4 步）</h3>
+      </div>
+      <ol class="glist glist--steps">
+        <li><b>声明</b><span>显示未成年人使用限制声明。必须勾选「我已年满 18 周岁（或为未成年人的监护人），并已阅读并理解上述声明。」才能继续，否则「下一步」按钮保持禁用。</span></li>
+        <li><b>外观</b><span>选主题：<code>深色</code> / <code>浅色</code> / <code>跟随系统</code>。之后在「设置 → 外观」可随时改。</span></li>
+        <li><b>数据存储位置</b><span>二选一：<strong>使用默认位置</strong>（<code>%APPDATA%\Lumen</code>）或 <strong>自定义位置</strong>（可浏览选盘符）。</span></li>
+        <li><b>添加游戏账号</b><span>可点「<b>添加</b>」登录，或点「<b>跳过</b>」直接进入。不登录也能用，只是进不去正版服务器。</span></li>
+      </ol>
+      <div class="tip">
+        <b>数据目录建议</b>
+        <span>实例和游戏文件都存这里，卸载启动器不会自动删除。想换位置在「设置 → 基本设置 → 数据存储位置」点「更改」。</span>
+      </div>
+    </article>
+
+    <!-- 3. 账号 -->
+    <article class="guide reveal" id="g-account">
+      <div class="guide__head">
+        <span class="guide__no">03</span>
+        <h3>添加账号</h3>
+      </div>
+      <p class="guide__lead">右上角头像 → 「添加账号」，在「验证服务」下拉框里选：</p>
+      <ul class="glist">
+        <li><b>微软账号</b><span>MSAL 设备码流程：点登录后弹出一个码和网址 → 浏览器打开该网址 → 输入码 → 用你的微软账号授权 → 回到启动器完成。令牌自动续期，不用反复登。</span></li>
+        <li><b>Mojang 账号</b><span>老版本正版账号（已较少见）。</span></li>
+        <li><b>离线账号</b><span>不登录正版，直接以本地档案进游戏。</span></li>
+        <li><b>第三方验证服务</b><span>下拉框底部「添加」可接入任意 Yggdrasil 服务（如自建皮肤站）。</span></li>
+      </ul>
+      <div class="tip tip--warn">
+        <b>常见报错</b>
+        <span>「您的微软账号是儿童账号」「没有 Xbox 档案」「Xbox Live 在您所在国家/地区不可用」——都是微软侧的限制，按提示在浏览器里完成对应设置后重试即可。</span>
+      </div>
+    </article>
+
+    <!-- 4. 装游戏 -->
+    <article class="guide reveal" id="g-install-game">
+      <div class="guide__head">
+        <span class="guide__no">04</span>
+        <h3>安装游戏（实例）</h3>
+      </div>
+      <p class="guide__lead">首页点「<b>添加</b>」新建实例，或左侧栏的 <code>add</code> 按钮：</p>
+      <ul class="glist">
+        <li><b>可选加载器</b><span>原版 / Forge / NeoForge / Fabric / Quilt，每个加载器都有独立版本列表；OptiFine 走单独安装流程。</span></li>
+        <li><b>多实例并存</b><span>同一 Minecraft 版本可装多个实例（例如 1.20.1 原版和 1.20.1 Forge 并存）。</span></li>
+        <li><b>Java 运行时</b><span>自动下载，不用自己装 JDK。</span></li>
+        <li><b>装整合包</b><span>把整合包 <code>.zip</code> 直接拖到启动器窗口，或从商店一键装。</span></li>
+        <li><b>深度链接</b><span>支持 <code>curseforge://</code> / <code>modrinth://</code> / <code>technic://</code> / <code>lumen://</code> 链接。</span></li>
+      </ul>
+      <div class="tip">
+        <b>实例是什么？</b>
+        <span>一个实例 = 一套独立的 Minecraft（版本 + 加载器 + 模组 + 存档）。想换配置就新建实例，互不影响。</span>
+      </div>
+    </article>
+
+    <!-- 5. 网络 -->
+    <article class="guide reveal" id="g-network">
+      <div class="guide__head">
+        <span class="guide__no">05</span>
+        <h3>网络设置（下载慢时必看）</h3>
+      </div>
+      <p class="guide__lead">「设置 → 网络设置」，三个关键项：</p>
+      <ul class="glist">
+        <li><b>使用 BMCLAPI 镜像</b><span>下拉框选 <code>自动 (根据网络决定)</code>（国内走镜像、海外走官方）/ <code>官方</code> / <code>BMCL</code>。镜像地址可自定义，保存后立即生效不用重启。</span></li>
+        <li><b>使用系统代理</b><span>默认<strong>开启</strong>。上方「HTTP 代理服务器设置」填了地址就优先用它；没填则自动用系统里已配置的代理。检测不到代理时会扫常见本地代理端口（7897 / 7890 / 10809 等）。</span></li>
+        <li><b>使用内置 CurseForge 代理</b><span>默认<strong>开启</strong>，由内置代理转发，<strong>不需要 API Key</strong>。关掉后才会显示 API Key 输入框，你填自己的 Key 就直连 <code>api.curseforge.com</code>。</span></li>
+      </ul>
+      <div class="tip">
+        <b>下载一直 ETIMEDOUT？</b>
+        <span>Lumen 会同时问多个 DNS 并在多个 IP 间竞速，加上代理自动发现，一般能绕开单点不通。若仍失败，把「使用 BMCLAPI 镜像」改成 <code>官方</code> 试试。</span>
+      </div>
+    </article>
+
+    <!-- 6. Java -->
+    <article class="guide reveal" id="g-java">
+      <div class="guide__head">
+        <span class="guide__no">06</span>
+        <h3>内存与 Java 设置</h3>
+      </div>
+      <p class="guide__lead">「设置 → 全局实例设置 → Java 内存」：</p>
+      <ul class="glist">
+        <li><b>不指定内存</b><span>不干预，交给系统。</span></li>
+        <li><b>自动</b><span>推荐。启动器按物理内存比例分配（界面会显示「系统空闲内存: xx / xx」）。</span></li>
+        <li><b>手动指定</b><span>填最小 / 最大 MB。经验值：2G 足够轻量整合包，4–6G 适合大型整合包，8G+ 留给光影。</span></li>
+      </ul>
+      <p class="guide__lead">同页还能设 <code>前置命令</code>、<code>JVM 启动选项</code>、<code>环境变量</code>，以及 Minecraft 的<strong>分辨率</strong>（宽/高/全屏）和<strong>分辨率预设</strong>。</p>
+      <div class="tip tip--warn">
+        <b>卡顿？</b>
+        <span>先看内存分配是否过低，再看「外观 → 背景效果」是否开着特效（界面里就写明「如果觉得卡就可以关掉」）。</span>
+      </div>
+    </article>
+
+    <!-- 7. 商店 -->
+    <article class="guide reveal" id="g-store">
+      <div class="guide__head">
+        <span class="guide__no">07</span>
+        <h3>装模组与整合包</h3>
+      </div>
+      <p class="guide__lead">左侧栏 <code>store</code> 图标进入市场，包含：</p>
+      <ul class="glist glist--grid">
+        <li><b>Modrinth</b><span>全程可用，无需 Key</span></li>
+        <li><b>CurseForge</b><span>走内置代理或自填 Key</span></li>
+        <li><b>Feed The Beast</b><span>经典整合包</span></li>
+        <li><b>模组</b><span>含依赖自动解析</span></li>
+        <li><b>资源包</b><span>材质 / 特效</span></li>
+        <li><b>光影包</b><span>画面与光影</span></li>
+        <li><b>整合包</b><span>一键装整套</span></li>
+        <li><b>数据包 / 蓝图</b><span>扩展内容</span></li>
+      </ul>
+      <p class="guide__lead">选好项目 → 选实例 → 安装。模组的<strong>依赖会自动拉取</strong>，不用手动一个个装。</p>
+    </article>
+
+    <!-- 8. 外观 -->
+    <article class="guide reveal" id="g-theme">
+      <div class="guide__head">
+        <span class="guide__no">08</span>
+        <h3>外观与主题（全部开放）</h3>
+      </div>
+      <p class="guide__lead">「设置 → 外观」，可调项全部无条件开放，没有赞助门槛：</p>
+      <ul class="glist">
+        <li><b>主题</b><span>深色 / 浅色 / 跟随系统</span></li>
+        <li><b>主题颜色和模糊</b><span>顶栏、侧边栏、主色、卡片、背景、警告、错误色</span></li>
+        <li><b>背景效果</b><span>无 / 粒子 / 光晕等（卡就关掉）</span></li>
+        <li><b>背景图 / 背景视频</b><span>可本机选、可用桌面壁纸、也可填 URL</span></li>
+        <li><b>主题背景音乐</b><span>可填 HTTP/HTTPS 音频 URL</span></li>
+        <li><b>圆角</b><span>卡片、对话框、菜单、面板统一开关</span></li>
+        <li><b>字体</b><span>自定义字体文件 + 字号调节</span></li>
+        <li><b>自定义 CSS</b><span>写自己的样式覆盖启动器</span></li>
+        <li><b>导出 / 导入主题</b><span><code>.xtheme</code> 文件，可与朋友分享</span></li>
+        <li><b>主题库</b><span>保存并管理多套全局主题</span></li>
+        <li><b>侧边栏样式</b><span>经典 / 凹槽两种，可实时预览</span></li>
+      </ul>
+      <div class="tip">
+        <b>单个实例单独换主题？</b>
+        <span>在实例的设置里打开「实例主题」开关，即可为该实例单独指定外观，媒体文件会自动复制到实例目录。</span>
+      </div>
+    </article>
+
+    <!-- 9. 进阶 -->
+    <article class="guide reveal" id="g-advanced">
+      <div class="guide__head">
+        <span class="guide__no">09</span>
+        <h3>进阶：命令面板与手柄</h3>
+      </div>
+      <ul class="glist">
+        <li><b>命令面板 · Ctrl+Shift+C</b><span>全局呼出，直接跳转到任意功能。可在「设置 → 基本设置 → 快速操作」里改快捷键。</span></li>
+        <li><b>大屏（Big Picture）模式</b><span>接入手柄后可用，或在 Steam Deck / 掌机上自动进入。含独立的库、市场、模组、存档、光影抽屉界面。</span></li>
+        <li><b>支持的手柄</b><span>Xbox / Steam Deck / PS2 / PS3 / PS4 / PS5 / Wii / Switch，D-Pad 与摇杆空间焦点导航。</span></li>
+        <li><b>开放局域网联机</b><span>实例设置里可直接开服给同一局域网的朋友玩。</span></li>
+        <li><b>存档 / 截图 / 备份</b><span>实例内可管理存档、查看截图、备份还原。</span></li>
+        <li><b>发布到 Modrinth</b><span>可把自己的模组包发布到 Modrinth。</span></li>
+      </ul>
+    </article>
+
+    <!-- 10. 隐藏功能 -->
+    <article class="guide reveal" id="g-hidden">
+      <div class="guide__head">
+        <span class="guide__no">10</span>
+        <h3>隐藏功能：离线运行完整版</h3>
+      </div>
+      <p class="guide__lead">不登录账号时，游戏默认以<strong>试用版</strong>（demo 模式）启动。想要完整版，两条路：</p>
+      <ul class="glist">
+        <li><b>显式开关</b><span>「设置 → 基本设置 → <strong>离线运行完整版</strong>」打开。说明原文：「未登录账号时以完整版启动游戏，而不是试用版。」</span></li>
+        <li><b>隐藏手势</b><span>在整合包市场顶部<strong>连续点击正版提示 5 次</strong>（3 秒无操作计数清零）即可切换，会弹通知提示当前状态。</span></li>
+      </ul>
+      <div class="tip tip--warn">
+        <b>请自行判断</b>
+        <span>此功能绕过了正版的试用版限制。仅在你不拥有正版账号时使用，且请遵守 Minecraft 的最终用户许可协议。</span>
+      </div>
+    </article>
+
+    <!-- 11. 注意 -->
+    <article class="guide reveal" id="g-pitfall">
+      <div class="guide__head">
+        <span class="guide__no">11</span>
+        <h3>必读注意事项</h3>
+      </div>
+      <ul class="glist glist--warn">
+        <li><b>自动更新默认关闭</b><span>「设置 → 关于 → 升级」会显示「尚未配置更新源 / Lumen 没有内置的更新服务器」。需在启动前设 <code>LUMEN_UPDATE_ENDPOINT</code> 环境变量才启用。升级请手动下载新安装包覆盖安装。</span></li>
+        <li><b>首次启动需联网</b><span>账号登录、版本清单、模组下载都依赖网络。装好游戏本体后，无网络也能离线游玩。</span></li>
+        <li><b>数据目录独立</b><span>Lumen 存在 <code>%APPDATA%\Lumen</code>，与 XMCL 完全隔离，两个可以共存。协议是 <code>lumen://</code>，不会抢 XMCL 的。</span></li>
+        <li><b>卸载不删数据</b><span>卸载启动器不会删除游戏文件和实例，卸载前记得自己清理数据目录。</span></li>
+        <li><b>CurseForge 无 Key 报错</b><span>如果报 403，说明你关掉了内置代理又没填自己的 Key。把「使用内置 CurseForge 代理」重新打开即可。</span></li>
+        <li><b>未成年人限制</b><span>首启向导第 1 步必须勾选确认才能进入，首页与「设置 → 关于」也会常驻声明。注意：这只是提示与确认机制，不具备年龄核验能力。</span></li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ 对比 ============ -->
+<section class="section section--alt" id="compare">
+  <div class="section__head reveal">
+    <span class="eyebrow">横向对比</span>
+    <h2>Lumen 到底解决了什么</h2>
+    <p class="section__lead">与主流启动器的关键差异。</p>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th>能力</th>
+          <th class="cmp__hl">Lumen</th>
+          <th>PCL</th>
+          <th>HMCL</th>
+          <th>XMCL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>下载 MC</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 无限制</td>
+          <td><span class="no">✕</span> 源码硬关闭</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>主题 / 配色</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 7 项配色全开放</td>
+          <td><span class="no">✕</span> 10 个被锁</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>镜像地址</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 完全可改 + 热更新</td>
+          <td><span class="no">✕</span> 写死</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>CurseForge Key</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 用户自填</td>
+          <td>—</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="no">✕</span> 仅环境变量</td>
+        </tr>
+        <tr>
+          <td>上游服务依赖</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 已切断</td>
+          <td>部分</td>
+          <td>部分</td>
+          <td><span class="no">✕</span> 绑定</td>
+        </tr>
+        <tr>
+          <td>手柄 / 大屏模式</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 完整</td>
+          <td><span class="no">✕</span></td>
+          <td><span class="no">✕</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>界面语言</td>
+          <td class="cmp__hl">简体中文</td>
+          <td>中文为主</td>
+          <td>多语言</td>
+          <td>多语言</td>
+        </tr>
+        <tr>
+          <td>启动时无关请求</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 无</td>
+          <td>有</td>
+          <td>有</td>
+          <td><span class="no">✕</span> 新闻轮播</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="section__head reveal">
+    <span class="eyebrow">常见问题</span>
+    <h2>你可能想问的</h2>
+  </div>
+
+  <div class="faq reveal">
+    <details class="faq__item" open>
+      <summary>需要账号吗？需要付费吗？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>不需要注册任何平台账号，也完全免费。唯一的"账号"是游戏本身的 Minecraft 账号——支持微软正版登录（MSAL + Xbox Live + XSTS 三段式 OAuth 设备码流程）与各类外置登录（Yggdrasil）。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>会和其他启动器冲突吗？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>不会。Lumen 使用独立的数据目录 <code>%APPDATA%\Lumen</code>、独立的 <code>appId</code>（<code>app.lumen.launcher</code>）以及独立的 <code>lumen://</code> URL 协议，可与已安装的 XMCL 同时存在，互不抢占。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>Windows 提示"未知发布者"怎么办？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>当前安装包未做代码签名，这是个人维护项目的常态。点击「更多信息」→「仍要运行」即可。后续若配置了签名证书（<code>electron-builder.config.ts</code> 中的 <code>win.signtoolOptions.certificateFile</code>）即可消除该提示。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>CurseForge 搜索不了模组？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>CurseForge 官方要求 API Key。请前往「设置 → 网络 → CurseForge API Key」粘贴你自己申请的 Key。留空时 Lumen 会给出明确提示，而不是抛出 403。Modrinth 全程无需 Key，功能完全可用。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>支持哪些模组加载器？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>原版、Forge、Fabric、Quilt、NeoForge、OptiFine 全部支持，可为同一 Minecraft 版本并存多个实例。Java 运行时由启动器自动下载安装与分配内存。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>会不会偷偷上传我的数据？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>不会。Lumen 没有账号体系，没有遥测上报，首页不再拉取新闻轮播，所有上游服务依赖已被切断。自更新默认关闭，只有当你显式设置 <code>LUMEN_UPDATE_ENDPOINT</code> 时才会检查更新。唯一的网络行为是你主动下载游戏文件、模组与访问你配置的镜像源。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary>能否自己修改源码？<span class="faq__ico"></span></summary>
+      <div class="faq__body">
+        <p>暂时不可以。Lumen 目前仅提供编译好的安装版与便携版，暂未开放源代码的对外获取与二次分发，相关流程正在整理中。后续开放时会通过项目社区渠道公布，请留意后续公告。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 鸣谢 ============ -->
+<section class="section section--alt" id="credits">
+  <div class="section__head reveal">
+    <span class="eyebrow">鸣谢</span>
+    <h2>站在巨人的肩膀上</h2>
+    <p class="section__lead">Lumen 建立在这些开源项目的成果之上，特此致谢。</p>
+  </div>
+
+  <div class="grid grid--3">
+    <article class="credit reveal">
+      <div class="credit__mark">X</div>
+      <h3>XMCL</h3>
+      <p class="credit__lic">MIT License</p>
+      <p>Lumen 的主体架构、Electron 外壳、主题系统与微软正版认证均源自 X Minecraft Launcher，是本项目最核心的基础。</p>
+      <a href="https://github.com/Voxelum/x-minecraft-launcher" target="_blank" rel="noopener">github.com/Voxelum/x-minecraft-launcher</a>
+    </article>
+    <article class="credit reveal">
+      <div class="credit__mark">P</div>
+      <h3>PCL</h3>
+      <p class="credit__lic">PCL 分发有限许可</p>
+      <p>功能清单、交互设计与设置项的组织方式参考了 Plain Craft Launcher，尤其在下载源与主题个性化方面提供了重要参照。</p>
+      <a href="https://github.com/Meloong-Git/PCL" target="_blank" rel="noopener">github.com/Meloong-Git/PCL</a>
+    </article>
+    <article class="credit reveal">
+      <div class="credit__mark">H</div>
+      <h3>HMCL</h3>
+      <p class="credit__lic">GPL-3.0</p>
+      <p>镜像（BMCLAPI）与资源提供方（provider）的抽象思路参考了 HMCL。相关部分为独立实现，未复制其源码。</p>
+      <a href="https://github.com/HMCL-dev/HMCL" target="_blank" rel="noopener">github.com/HMCL-dev/HMCL</a>
+    </article>
+  </div>
+
+  <div class="license reveal">
+    <div>
+      <b>Lumen</b> 当前尚未开放源代码的对外获取，相关流程正在整理中。上游各项目的许可协议如上所示。
+    </div>
+    <div class="license__links">
+      <a href="https://github.com/Voxelum/x-minecraft-launcher" target="_blank" rel="noopener">XMCL ↗</a>
+      <a href="https://github.com/Meloong-Git/PCL" target="_blank" rel="noopener">PCL ↗</a>
+      <a href="https://github.com/HMCL-dev/HMCL" target="_blank" rel="noopener">HMCL ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 未成年人声明 + 免责 ============ -->
+<section class="section">
+  <div class="notice reveal">
+    <div class="notice__head">
+      <span class="notice__badge">使用须知</span>
+      <h2 class="notice__title">未成年人使用限制声明</h2>
+      <p class="notice__basis">
+        依据《关于进一步严格管理 切实防止未成年人沉迷网络游戏的通知》（国新出发〔2021〕14号）
+      </p>
+    </div>
+
+    <div class="notice__body">
+      <p>该通知第五条明确，本通知所称未成年人是指未满 18 周岁的公民；第四条要求家庭等社会各方面营造有利于未成年人健康成长的良好环境，依法履行未成年人监护职责，并在未成年人使用网络游戏时督促其完成实名身份验证。</p>
+
+      <p>Lumen 是一款第三方工具，提供 Minecraft 客户端的安装、启动与模组管理功能，不运营游戏内容、不涉及游戏内消费，且<strong>未接入国家新闻出版署网络游戏防沉迷实名验证系统</strong>。因此，本项目<strong>不具备识别使用者年龄、或实施未成年人游戏时段与时长限制的技术能力</strong>。</p>
+
+      <p>基于上述情况，本项目采取以下措施：</p>
+      <ol class="notice__measures">
+        <li>首次启动向导第 1 步要求使用者勾选确认「我已年满 18 周岁（或为未成年人的监护人），并已阅读并理解上述声明。」，未确认无法进入后续步骤；</li>
+        <li>首页与「设置 → 关于」页面常驻展示本声明；</li>
+        <li>本声明属于<strong>使用者确认与提示机制</strong>，不构成技术性的年龄核验或强制拦截。使用者是否如实确认，由其自行负责。</li>
+      </ol>
+
+      <div class="notice__cols">
+        <div class="notice__block">
+          <h3>关于责任</h3>
+          <p>使用者应遵守国家法律法规及《Minecraft 最终用户许可协议》，对自身的账号与使用行为负责。未成年人进行网络游戏，应当在监护人的指导和陪同下进行，由监护人督促其完成实名身份验证并合理安排游戏时间。</p>
+        </div>
+
+        <div class="notice__block">
+          <h3>给监护人的建议</h3>
+          <ul class="notice__tips">
+            <li>使用官方客户端自带的「青少年模式」或家长控制功能，设置消费与时长上限；</li>
+            <li>依据国新出发〔2021〕14号第一条，未成年人仅可在周五、周六、周日及法定节假日 20:00—21:00 各 1 小时使用网络游戏；</li>
+            <li>关注孩子的游戏内容与时长，必要时通过相关平台与运营方沟通处理。</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="notice__foot">
+        本声明不免除任何主体依法应承担的责任。若您认为本声明的表述不准确或存在歧义，欢迎通过项目社区渠道提出修订意见。
+      </p>
+    </div>
+  </div>
+
+  <div class="disclaimer reveal">
+    <p>本产品并非 Minecraft 官方产品，未经 Mojang Studios 或 Microsoft 官方认可，也不代表 Mojang Studios 或 Microsoft 的任何官方立场。Minecraft 是 Mojang Studios 的商标。本项目与 Mojang Studios、Microsoft 无任何关联，也未获得其授权或背书。</p>
+    <p>Windows 是 Microsoft Corporation 的注册商标。Minecraft 使用到的部分资源来自社区与原作者，请遵守其各自的许可协议。</p>
+  </div>
+</section>
+
+<!-- ============ CTA 横幅 ============ -->
+<section class="cta reveal">
+  <div class="cta__glow" aria-hidden="true"></div>
+  <div class="cta__body">
+    <h2>现在就把它装上</h2>
+    <p>Windows 10 / 11 · x64 · 免安装运行时不需预装 · 下载即用</p>
+    <div class="cta__actions">
+      <a class="btn btn--primary btn--lg" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe" data-rel="Lumen-0.1.1-win32-x64-setup.exe"
+         download="Lumen-0.1.1-win32-x64-setup.exe" data-dl="installer">
+        <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+        下载安装版
+        <span class="btn__meta">99.5 MB</span>
+      </a>
+      <a class="btn btn--ghost btn--lg" href="./downloads/Lumen-0.1.1-win32-x64.zip" data-rel="Lumen-0.1.1-win32-x64.zip"
+         download="Lumen-0.1.1-win32-x64.zip" data-dl="portable">
+        <svg viewBox="0 0 24 24" class="btn__ico" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+        便携版 ZIP
+        <span class="btn__meta">142.4 MB</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <picture>
+        <source srcset="./assets/img/logo.webp" type="image/webp">
+        <img src="./assets/img/logo.png" alt="" class="footer__logo">
+      </picture>
+      <div>
+        <b>Lumen</b>
+        <span>简洁、纯净、不设限的 Minecraft 启动器</span>
+      </div>
+    </div>
+    <nav class="footer__links">
+      <div><b>下载</b><a href="#download">安装版</a><a href="#download">便携版</a><a href="#download">校验文件</a></div>
+      <div><b>文档</b><a href="#guide">使用说明</a><a href="#features">功能特性</a><a href="#compare">横向对比</a><a href="#faq">常见问题</a></div>
+      <div><b>社区</b>
+        <a href="https://t.me/Fog_Lucifer" target="_blank" rel="noopener">Telegram 群组</a>
+        <a href="https://t.me/Lucifer_Fog" target="_blank" rel="noopener">Telegram 频道</a>
+      </div>
+    </nav>
+  </div>
+  <div class="footer__bar">
+    <span>© 2026 Lumen · 由 Lucifer 维护</span>
+    <span class="footer__offline">纯净无捆绑 · 不收集任何数据</span>
+  </div>
+</footer>
+
+<!-- 吸底下载条 -->
+<div class="dock" id="dock">
+  <div class="dock__info">
+    <img src="./assets/img/icon-44.png" alt="" width="36" height="36">
+    <div>
+      <b>Lumen v0.1.1</b>
+      <span>Windows x64 · 99.5 MB · 无捆绑</span>
+    </div>
+  </div>
+  <a class="btn btn--primary" href="./downloads/Lumen-0.1.1-win32-x64-setup.exe" data-rel="Lumen-0.1.1-win32-x64-setup.exe"
+     download="Lumen-0.1.1-win32-x64-setup.exe" data-dl="installer">立即下载</a>
+</div>
+
+<!-- 提示条 -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./assets/js/main.js"></script>
+</body>
+</html>

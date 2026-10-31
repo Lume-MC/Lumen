@@ -1,0 +1,16 @@
+# 大体积发布产物不进入 Git 历史，走 GitHub Release 资产分发。
+# GitHub 单文件上限 100 MB，且这类二进制体积大、变更少。
+downloads/*.exe
+downloads/*.zip
+downloads/*.msi
+downloads/*.dmg
+downloads/*.AppImage
+downloads/*.blockmap
+
+# 保留 SHA-256 边车（体积很小），便于仓库内直接查看校验值。
+!downloads/*.sha256
+
+# 常见临时文件
+.DS_Store
+Thumbs.db
+*.log
