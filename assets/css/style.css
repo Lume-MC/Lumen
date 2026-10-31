@@ -71,6 +71,14 @@
   background-clip: text;
 }
 
+/* 浅色主题：金色渐变数字（统计数值、体积）改用深色渐变 */
+[data-theme="light"] .stat b,
+[data-theme="light"] .dl-card__size b {
+  background-image: linear-gradient(135deg, #8a5d04, #7d5402);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 /* ---------- 基础 ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 
