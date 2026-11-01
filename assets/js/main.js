@@ -378,8 +378,8 @@
   function initPortableSize() {
     var el = $('#portableSize');
     if (!el) return;
-    el.textContent = '142.4';
-    el.title = '压缩包体积约 142.4 MB，解压后约 339 MB';
+    el.textContent = '137.4';
+    el.title = '压缩包体积约 137.4 MB，解压后约 339 MB';
   }
 
   /* ---------------------------------------------------------
