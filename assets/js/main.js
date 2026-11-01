@@ -278,8 +278,8 @@
      --------------------------------------------------------- */
   function initDownloadFeedback() {
     var NAMES = {
-      installer: 'Lumen-0.2.2-win32-x64-setup.exe',
-      portable: 'Lumen-0.2.2-win32-x64.zip'
+      installer: 'Lumen-0.2.3-win32-x64-setup.exe',
+      portable: 'Lumen-0.2.3-win32-x64.zip'
     };
     $$('[data-dl]').forEach(function (a) {
       a.addEventListener('click', function () {
@@ -388,7 +388,7 @@
          - http(s) 打开：改写为 GitHub Release 资产直链
            （大体积安装包 / 便携版不进 Git 仓库，只作为 Release 资产）
      --------------------------------------------------------- */
-  var RELEASE_BASE = 'https://github.com/Lume-MC/Lumen/releases/download/v0.2.2/';
+  var RELEASE_BASE = 'https://github.com/Lume-MC/Lumen/releases/download/v0.2.3/';
 
   function initReleaseLinks() {
     var online = /^https?:$/.test(location.protocol);
@@ -402,7 +402,7 @@
 
     var folder = $('[data-rel-folder]');
     if (folder) {
-      folder.setAttribute('href', 'https://github.com/Lume-MC/Lumen/releases/tag/v0.2.2');
+      folder.setAttribute('href', 'https://github.com/Lume-MC/Lumen/releases/tag/v0.2.3');
     }
   }
 
