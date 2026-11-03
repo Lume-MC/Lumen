@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Lumen — 简洁、纯净、不设限的 Minecraft 启动器</title>
-<meta name="description" content="Lumen 是一款简洁、纯净、不设限的 Minecraft 启动器。下载完全开放、主题完全自由、镜像完全可配置，没有捆绑、没有资讯噪音、没有账号体系。">
+<meta name="description" content="Lumen 是一款简洁、纯净、不设限的 Minecraft 启动器。下载完全开放、主题完全自由、镜像完全可配置，没有捆绑、没有资讯噪音、不强制注册平台账号。">
 <meta name="theme-color" content="#08070D">
 <link rel="icon" type="image/png" href="./assets/img/icon-44.png">
 <link rel="apple-touch-icon" href="./assets/img/icon-150.png">
@@ -90,7 +90,7 @@
 
       <p class="hero__desc reveal">
         下载不做限制，主题不做门槛，镜像完全交由你决定。
-        没有捆绑、没有资讯噪音、没有账号体系。
+        没有捆绑、没有资讯噪音、不强制注册平台账号。
       </p>
 
       <div class="hero__cta reveal">
@@ -113,9 +113,9 @@
 
       <div class="stats reveal">
         <div class="stat"><b data-count="7">0</b><span>项主题配色可调</span></div>
-        <div class="stat"><b data-count="2198">0</b><span>项单元测试通过</span></div>
+        <div class="stat"><b data-count="2308">0</b><span>项单元测试用例</span></div>
         <div class="stat"><b data-count="37">0</b><span>个独立 npm 包</span></div>
-        <div class="stat"><b data-count="5">0</b><span>种模组加载器</span></div>
+        <div class="stat"><b data-count="7">0</b><span>种模组加载器</span></div>
       </div>
     </div>
 
@@ -160,7 +160,7 @@
       <h3>下载完全开放</h3>
       <p>走官方 Mojang 或国内镜像，支持分段并发下载、断点续传、失败自动重试、SHA-1 校验与损坏文件自动修复。不存在任何「不支持下载」开关。</p>
       <ul class="ticks">
-        <li>Forge / Fabric / Quilt / NeoForge / OptiFine</li>
+        <li>原版 / Forge / Fabric / Quilt / NeoForge / OptiFine / LabyMod</li>
         <li>自动安装并管理 Java 运行时</li>
         <li>多连接并发下载器</li>
       </ul>
@@ -216,11 +216,11 @@
     <article class="card card--wide reveal">
       <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4z"/><path d="M2 19h20"/></svg></div>
       <h3>干净的首页</h3>
-      <p>删除了上游的启动即拉取新闻轮播与贡献者接口，首页不再发起任何无关网络请求。只留下你需要的东西。</p>
+      <p>删除了上游的启动即拉取新闻轮播与贡献者接口，首页不再发起任何无关的新闻与资讯请求。只留下你需要的东西。</p>
       <ul class="ticks">
-        <li>启动零冗余请求</li>
-        <li>无账号体系、无遥测上报</li>
-        <li>自更新默认关闭，源由你指定</li>
+        <li>无新闻轮播、无资讯噪音</li>
+        <li>遥测默认开启，可在设置里一键关闭</li>
+        <li>自更新源指向 Lumen 官方仓库</li>
       </ul>
     </article>
   </div>
@@ -233,13 +233,13 @@
     </div>
     <div class="trust__item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-      <b>零遥测</b>
-      <span>不采集使用数据、不上传任何行为记录</span>
+      <b>遥测可关闭</b>
+      <span>默认上报启动与登录事件，设置里一键可关</span>
     </div>
     <div class="trust__item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg>
-      <b>无账号体系</b>
-      <span>启动即用，不需要注册任何平台账号</span>
+      <b>无需注册</b>
+      <span>不强制注册平台账号，登录游戏账号即可使用</span>
     </div>
     <div class="trust__item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17h16M6 17V9M10 17V5M14 17v-6M18 17v-9"/></svg>
@@ -408,7 +408,7 @@
 
       <ul class="dl-meta">
         <li><span>平台</span><div>Windows 10 / 11 · x64</div></li>
-        <li><span>解压后</span><div>约 341 MB · 26 个文件</div></li>
+        <li><span>解压后</span><div>约 339 MB · 21 个文件</div></li>
         <li><span>数据目录</span><div>默认仍为 <code>%APPDATA%\Lumen</code>，可在向导中改</div></li>
         <li><span>说明</span><div>不自动注册 <code>lumen://</code> 协议</div></li>
       </ul>
@@ -565,7 +565,7 @@
       </div>
       <p class="guide__lead">首页点「<b>添加</b>」新建实例，或左侧栏的 <code>add</code> 按钮：</p>
       <ul class="glist">
-        <li><b>可选加载器</b><span>原版 / Forge / NeoForge / Fabric / Quilt，每个加载器都有独立版本列表；OptiFine 走单独安装流程。</span></li>
+        <li><b>可选加载器</b><span>原版 / Forge / NeoForge / Fabric / Quilt / OptiFine / LabyMod，每个加载器都有独立版本列表；OptiFine 走单独安装流程。</span></li>
         <li><b>多实例并存</b><span>同一 Minecraft 版本可装多个实例（例如 1.20.1 原版和 1.20.1 Forge 并存）。</span></li>
         <li><b>Java 运行时</b><span>自动下载，不用自己装 JDK。</span></li>
         <li><b>装整合包</b><span>把整合包 <code>.zip</code> 直接拖到启动器窗口，或从商店一键装。</span></li>
@@ -700,7 +700,7 @@
         <h3>必读注意事项</h3>
       </div>
       <ul class="glist glist--warn">
-        <li><b>自动更新默认关闭</b><span>「设置 → 关于 → 升级」会显示「尚未配置更新源 / Lumen 没有内置的更新服务器」。需在启动前设 <code>LUMEN_UPDATE_ENDPOINT</code> 环境变量才启用。升级请手动下载新安装包覆盖安装。</span></li>
+        <li><b>自动更新</b><span>默认指向 <code>Lume-MC/Lumen</code> 官方 Release（并以官网 <code>release.json</code> 作为备用镜像，避开 GitHub API 匿名限流）。想换成自己的源，启动前设 <code>LUMEN_UPDATE_ENDPOINT</code> 环境变量。升级采用增量方式，只替换 asar，不重装整个程序。</span></li>
         <li><b>首次启动需联网</b><span>账号登录、版本清单、模组下载都依赖网络。装好游戏本体后，无网络也能离线游玩。</span></li>
         <li><b>数据目录独立</b><span>Lumen 存在 <code>%APPDATA%\Lumen</code>，与 XMCL 完全隔离，两个可以共存。协议是 <code>lumen://</code>，不会抢 XMCL 的。</span></li>
         <li><b>卸载不删数据</b><span>卸载启动器不会删除游戏文件和实例，卸载前记得自己清理数据目录。</span></li>
@@ -762,7 +762,7 @@
         </tr>
         <tr>
           <td>上游服务依赖</td>
-          <td class="cmp__hl"><span class="yes">✓</span> 已切断</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 自更新已指向自己的仓库</td>
           <td>部分</td>
           <td>部分</td>
           <td><span class="no">✕</span> 绑定</td>
@@ -783,7 +783,7 @@
         </tr>
         <tr>
           <td>启动时无关请求</td>
-          <td class="cmp__hl"><span class="yes">✓</span> 无</td>
+          <td class="cmp__hl"><span class="yes">✓</span> 无新闻轮播</td>
           <td>有</td>
           <td>有</td>
           <td><span class="no">✕</span> 新闻轮播</td>
@@ -832,14 +832,14 @@
     <details class="faq__item">
       <summary>支持哪些模组加载器？<span class="faq__ico"></span></summary>
       <div class="faq__body">
-        <p>原版、Forge、Fabric、Quilt、NeoForge、OptiFine 全部支持，可为同一 Minecraft 版本并存多个实例。Java 运行时由启动器自动下载安装与分配内存。</p>
+        <p>原版、Forge、Fabric、Quilt、NeoForge、OptiFine、LabyMod 全部支持，可为同一 Minecraft 版本并存多个实例。Java 运行时由启动器自动下载安装与分配内存。</p>
       </div>
     </details>
 
     <details class="faq__item">
       <summary>会不会偷偷上传我的数据？<span class="faq__ico"></span></summary>
       <div class="faq__body">
-        <p>不会。Lumen 没有账号体系，没有遥测上报，首页不再拉取新闻轮播，所有上游服务依赖已被切断。自更新默认关闭，只有当你显式设置 <code>LUMEN_UPDATE_ENDPOINT</code> 时才会检查更新。唯一的网络行为是你主动下载游戏文件、模组与访问你配置的镜像源。</p>
+        <p>不会。Lumen 没有强制性的平台账号体系，首页不拉取新闻轮播。自更新默认指向 <code>Lume-MC/Lumen</code> 官方仓库，你也可以用 <code>LUMEN_UPDATE_ENDPOINT</code> 换成自己的源。另外启动器会拉取一份很小的运行时配置（flights），并在启用遥测时上报启动与登录事件——两者都可以在设置里调整。</p>
       </div>
     </details>
 
@@ -996,7 +996,7 @@
   </div>
   <div class="footer__bar">
     <span>© 2026 Lumen · 由 Lucifer 维护</span>
-    <span class="footer__offline">纯净无捆绑 · 不收集任何数据</span>
+    <span class="footer__offline">纯净无捆绑 · 遥测可一键关闭</span>
   </div>
 </footer>
 

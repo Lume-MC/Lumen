@@ -31,10 +31,10 @@ lumen web/
 │       ├── icon-44/150/256.png   站点图标
 │       └── shot-*.png / .webp    实机界面截图（见下）
 └── downloads/                    真实下载文件（离线打包时放这里）
-    ├── Lumen-0.1.1-win32-x64-setup.exe          99.5 MB  安装版
-    ├── Lumen-0.1.1-win32-x64-setup.exe.sha256           校验文件
-    ├── Lumen-0.1.1-win32-x64.zip      142.4 MB  便携版
-    └── Lumen-0.1.1-win32-x64.zip.sha256         校验文件
+    ├── Lumen-0.2.3-win32-x64-setup.exe          99.1 MB  安装版
+    ├── Lumen-0.2.3-win32-x64-setup.exe.sha256           校验文件
+    ├── Lumen-0.2.3-win32-x64.zip      137.4 MB  便携版
+    └── Lumen-0.2.3-win32-x64.zip.sha256         校验文件
 ```
 
 `.exe` / `.zip` 已被 `.gitignore` 排除，不进 Git 历史；
@@ -72,7 +72,7 @@ Protocol 的 `Page.captureScreenshot` 抓取运行中的 Electron 渲染进程�
 改写为 GitHub Release 资产直链：
 
 ```
-https://github.com/Lume-MC/Lumen/releases/download/v0.1.1/<文件名>
+https://github.com/Lume-MC/Lumen/releases/download/v0.2.3/<文件名>
 ```
 
 原因：安装包与便携版 ZIP 体积都超过 Git 单文件 100 MB 上限，不适合放进仓库，
@@ -83,17 +83,17 @@ https://github.com/Lume-MC/Lumen/releases/download/v0.1.1/<文件名>
 **校验文件**可用于确认下载完整性：
 
 ```powershell
-certutil -hashfile .\downloads\Lumen-0.1.1-win32-x64-setup.exe SHA256
+certutil -hashfile .\downloads\Lumen-0.2.3-win32-x64-setup.exe SHA256
 ```
 
 应得到：
 ```
-4efad26357fdc1101c2366062f168f80e6e12405aee0cf77711b3e4b31212231
+0e95e85a5bb8be661409ad646823c29ad1b4f52892876eb02d520742a558772d
 ```
 
 便携版：
 ```
-8f2b7afbfd0a31c34c9dc5849015c217731a009374188be68e28398ad5382e66
+dbd80877f56ffcd06cb1f5b808786746c261e3971c8d8dcab04a18aea6b502af
 ```
 
 ---
@@ -103,8 +103,8 @@ certutil -hashfile .\downloads\Lumen-0.1.1-win32-x64-setup.exe SHA256
 1. 把新的安装包放进 `downloads/`，命名保持 `Lumen-<版本>-win32-x64-setup.exe`
 2. 重新生成校验文件：
    ```powershell
-   $h = (Get-FileHash .\downloads\Lumen-0.1.1-win32-x64-setup.exe -Algorithm SHA256).Hash.ToLower()
-   "$h  Lumen-0.1.1-win32-x64-setup.exe" | Set-Content .\downloads\Lumen-0.1.1-win32-x64-setup.exe.sha256 -Encoding ASCII
+   $h = (Get-FileHash .\downloads\Lumen-0.2.3-win32-x64-setup.exe -Algorithm SHA256).Hash.ToLower()
+   "$h  Lumen-0.2.3-win32-x64-setup.exe" | Set-Content .\downloads\Lumen-0.2.3-win32-x64-setup.exe.sha256 -Encoding ASCII
    ```
 3. 在 `index.html` 里同步四处：
    - 首屏按钮的 `href` / `download` 属性
@@ -121,7 +121,7 @@ certutil -hashfile .\downloads\Lumen-0.1.1-win32-x64-setup.exe SHA256
    ```
    边车从 `downloads\` 取（`release\` 目录里没有 `.sha256` 文件）。
 
-页面里出现的版本号 `v0.1.1`、体积 `99.5 MB` 也是硬编码的，一并改掉。
+页面里出现的版本号 `v0.2.3`、体积 `99.1 MB` 也是硬编码的，一并改掉。
 便携版体积在 `index.html`（`#portableSize`）和 `assets/js/main.js`（`initPortableSize`）
 **两处**都有，也要一起改。
 
@@ -273,7 +273,7 @@ certutil -hashfile .\downloads\Lumen-0.1.1-win32-x64-setup.exe SHA256
 | 10 | 隐藏功能：离线运行完整版 | `#g-hidden` |
 | 11 | 必读注意事项 | `#g-pitfall` |
 
-> **所有界面文案都取自 Lumen v0.1.1 实机运行界面**（CDP 连运行中的 Electron 抓
+> **所有界面文案都取自 Lumen v0.2.3 实机运行界面**（CDP 连运行中的 Electron 抓
 > `document.body.innerText`），不是根据 Minecraft 启动器通用经验推测的。
 > 升级启动器后若界面文案有变，需重新抓取并同步。
 
@@ -312,9 +312,9 @@ certutil -hashfile .\downloads\Lumen-0.1.1-win32-x64-setup.exe SHA256
 | 数字 | 来源 |
 | --- | --- |
 | 7 项主题配色可调 | `AppearanceItems.vue` 里 7 个 `SettingAppearanceColor`（顶端栏 / 侧边栏 / 主要色 / 卡片 / 背景 / 警告 / 错误） |
-| 2198 项单元测试通过 | `pnpm vitest run` → `2198 passed | 35 failed | 21 skipped` |
+| 2308 项单元测试用例 | `pnpm vitest run` → `2308 total | 2250 passed | 35 failed | 21 skipped`（2026-11-03 实跑；失败项为 `locales/en.yaml` 缺失等既有失败） |
 | 37 个独立 npm 包 | `pnpm-workspace.yaml` + `packages/*` 实际带 `package.json` 的目录数 |
-| 5 种模组加载器 | `HomeInstanceInstallDialog.vue` 的 `label=`：Minecraft / Forge / NeoForge / Fabric / Quilt（OptiFine 走单独流程） |
+| 7 种模组加载器 | `ModloaderSelector.vue` 的 `loaders` 常量：Vanilla / Forge / Fabric / Quilt / NeoForged / OptiFine / LabyMod |
 | PCL 锁 10 个主题 | `DIFF-vs-XMCL.md` 明确写「锁死 10 个主题」 |
 | 简体中文 | `xmcl-keystone-ui/locales/` **只有 `zh-CN.yaml`**，`i18n.ts` 注释写明「ships with a single language」 |
 
